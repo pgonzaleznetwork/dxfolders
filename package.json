@@ -1,0 +1,97 @@
+{
+  "name": "dxfolders",
+  "description": "todo",
+  "version": "0.0.1",
+  "dependencies": {
+    "@oclif/core": "^2.0.7",
+    "@salesforce/core": "^3.33.1",
+    "@salesforce/kit": "^1.8.4",
+    "@salesforce/sf-plugins-core": "^2.0.1",
+    "tslib": "^2"
+  },
+  "devDependencies": {
+    "@oclif/test": "^2.3.4",
+    "@salesforce/cli-plugins-testkit": "^3.0.0",
+    "@salesforce/dev-config": "^3.1.0",
+    "@salesforce/dev-scripts": "^3.1.0",
+    "@salesforce/prettier-config": "^0.0.2",
+    "@salesforce/ts-sinon": "1.3.21",
+    "@swc/core": "1.3.39",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "chai": "^4.3.6",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-salesforce": "^1.1.0",
+    "eslint-config-salesforce-license": "^0.1.6",
+    "eslint-config-salesforce-typescript": "^1.1.1",
+    "eslint-plugin-header": "^3.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsdoc": "^39.3.6",
+    "eslint-plugin-sf-plugin": "^1.1.0",
+    "husky": "^7.0.4",
+    "mocha": "^9.2.2",
+    "nyc": "^15.1.0",
+    "oclif": "^3.6.1",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3",
+    "shx": "0.3.4",
+    "sinon": "10.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "/lib",
+    "/messages",
+    "/oclif.manifest.json"
+  ],
+  "keywords": [
+    "force",
+    "salesforce",
+    "sfdx",
+    "salesforcedx",
+    "sfdx-plugin",
+    "sf-plugin",
+    "sf"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "sf",
+    "topicSeparator": " ",
+    "devPlugins": [
+      "@oclif/plugin-help"
+    ],
+    "topics": {
+      "hello": {
+        "description": "Commands to say hello."
+      }
+    }
+  },
+  "scripts": {
+    "build": "sf-build",
+    "clean": "sf-clean",
+    "clean-all": "sf-clean all",
+    "clean:lib": "shx rm -rf lib && shx rm -rf coverage && shx rm -rf .nyc_output && shx rm -f oclif.manifest.json",
+    "compile": "sf-compile",
+    "docs": "sf-docs",
+    "format": "sf-format",
+    "lint": "sf-lint",
+    "postinstall": "yarn husky install",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "yarn lint",
+    "prepack": "sf-prepack",
+    "pretest": "sf-compile-test",
+    "test": "sf-test",
+    "test:nuts": "nyc mocha \"**/*.nut.ts\" --slow 4500 --timeout 600000 --parallel",
+    "version": "oclif readme"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Pablo Gonzalez"
+}
