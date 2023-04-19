@@ -38,15 +38,6 @@ export default class ConnectOrg extends SfCommand<ConnectOrgResult> {
 
     const result = await connection.query<{ Name: string; Id: string }>('SELECT Id, Name FROM Account');
 
-    // Log the results
-    if (result.records.length > 0) {
-      // this.log('Found the following Accounts:');
-      for (const record of result.records) {
-        // this.log(`  • ${record.Name}: ${record.Id}`);
-      }
-    } else {
-      // this.log('No Accounts found.');
-    }
     return result;
   }
 }
