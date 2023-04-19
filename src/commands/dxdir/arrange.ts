@@ -20,23 +20,20 @@ export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
   public static readonly examples = messages.getMessages('examples');
 
   public static readonly flags = {
-    name: Flags.string({
-      summary: messages.getMessage('flags.name.summary'),
-      char: 'n',
-      required: false,
-    }),
     'apex-dir': Flags.directory({
       summary: messages.getMessage('flags.apex-dir.summary'),
       char: 'd',
       exists: true,
+      default: 'force-app/main/default/classes',
     }),
   };
 
   public async run(): Promise<DxdirArrangeResult> {
     const { flags } = await this.parse(DxdirArrange);
 
-    const name = flags.name ?? 'world';
-    this.log(`hello ${name} from /Users/pgonzalez/Documents/apps/sfplugin/dxfolders/src/commands/dxdir/arrange.ts`);
+    const apexDir = flags['apex-dir'];
+    this.log(`apexDir: ${apexDir}`);
+
     return {
       path: '/Users/pgonzalez/Documents/apps/sfplugin/dxfolders/src/commands/dxdir/arrange.ts',
     };
