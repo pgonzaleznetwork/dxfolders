@@ -7,6 +7,8 @@
     "@salesforce/core": "^3.33.1",
     "@salesforce/kit": "^1.8.4",
     "@salesforce/sf-plugins-core": "^2.0.1",
+    "got": "11.8.5",
+    "sfdc-soup": "^18.4.0",
     "tslib": "^2"
   },
   "devDependencies": {
@@ -69,6 +71,20 @@
     "topics": {
       "hello": {
         "description": "Commands to say hello."
+      },
+      "call": {
+        "description": "description for call",
+        "subtopics": {
+          "external": {
+            "description": "description for call.external"
+          }
+        }
+      },
+      "connect": {
+        "description": "description for connect"
+      },
+      "dxdir": {
+        "description": "description for dxdir"
       }
     }
   },
