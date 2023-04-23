@@ -50,7 +50,7 @@ export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
   }
 }
 
-function reoderFiles(classesPath = 'force-app/main/default/classes') {
+export function reoderFiles(classesPath = 'force-app/main/default/classes') {
   const files = fs.readdirSync(classesPath).map((file) => `${classesPath}/${file}`);
 
   let filesByPrefix = new Map();

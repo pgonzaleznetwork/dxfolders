@@ -1,0 +1,6 @@
+{
+  "bail": 1,
+  "verbose": true,
+  "setupFilesAfterEnv": ["jest-expect-message"],
+  "coverageReporters": ["json-summary", "text", "lcov"]
+}
