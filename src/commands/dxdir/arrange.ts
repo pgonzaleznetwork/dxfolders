@@ -40,7 +40,7 @@ export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
     const { flags } = await this.parse(DxdirArrange);
 
     const apexDir = flags['apex-dir'];
-    this.log(`apexDir: ${apexDir}`);
+    this.log(`Reading apex classes from ${apexDir}`);
 
     reoderFiles(apexDir);
 
@@ -51,6 +51,10 @@ export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
 }
 
 export function reoderFiles(classesPath = 'force-app/main/default/classes') {
+  if (!fs.existsSync(classesPath)) {
+    throw new Error(`Path ${classesPath} does not exist`);
+  }
+
   const files = fs.readdirSync(classesPath).map((file) => `${classesPath}/${file}`);
 
   let filesByPrefix = new Map();
