@@ -31,7 +31,8 @@ describe('All tests', () => {
 
   beforeAll(async () => {
     mock(project);
-    await DxdirArrange.run([]);
+    await reoderFiles();
+    // await DxdirArrange.run([]);
   });
 
   test('Top-level folders are created from prefixes', async () => {
