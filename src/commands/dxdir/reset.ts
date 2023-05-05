@@ -55,6 +55,8 @@ export default class DxdirReset extends SfCommand<DxdirResetResult> {
 }
 
 export function reset(apexDir, outputDir) {
+  console.log('did I get here? ' + apexDir + ' ' + outputDir);
+
   const files = fs.readdirSync(apexDir);
 
   // Loop through the files
