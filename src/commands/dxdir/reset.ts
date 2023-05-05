@@ -1,5 +1,8 @@
+/* eslint-disable */
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
+const path = require('path');
+const fs = require('fs');
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.load('dxfolders', 'dxdir.reset', [
@@ -48,5 +51,21 @@ export default class DxdirReset extends SfCommand<DxdirResetResult> {
     return {
       path: '/Users/pgonzalez/Documents/apps/sfplugin/dxfolders/src/commands/dxdir/reset.ts',
     };
+  }
+}
+
+export function reset(apexDir, outputDir) {
+  const files = fs.readdirSync(apexDir);
+
+  // Loop through the files
+  for (let file of files) {
+    const filePath = path.join(apexDir, file);
+
+    if (fs.statSync(filePath).isDirectory()) {
+      reset(filePath, outputDir);
+    } else {
+      const newFilePath = path.join(outputDir, file);
+      fs.renameSync(filePath, newFilePath);
+    }
   }
 }
