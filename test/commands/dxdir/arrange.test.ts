@@ -71,6 +71,17 @@ describe('All tests', () => {
     });
   });
 
+  test(`Classes that have a prefix that contains the word "test" should not be ignored, i.e Testim_AccountSync should create Testim as a domain folder`, async () => {
+    let files = [
+      `${DEFAULT_PATH}Testim/src/Testim_AccountSync.cls`,
+      `${DEFAULT_PATH}Testim/src/Testim_AccountSync.cls-meta.xml`,
+    ];
+
+    files.forEach((file) => {
+      expect(fs.existsSync(file), `${file} does not exist`).toEqual(true);
+    });
+  });
+
   test(`Both the .cls and .cls-meta.xml files for test classes should be moved
     to the "__tests__" folder under the correct prefix)"`, async () => {
     let files = [

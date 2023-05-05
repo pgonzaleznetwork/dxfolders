@@ -73,11 +73,20 @@ export function reoderFiles(classesPath = 'force-app/main/default/classes') {
   let keys = Array.from(filesByPrefix.keys());
 
   for (const prefix of keys) {
+    const logInfo = {
+      domain: prefix,
+    };
+
     const domainFolder = `${classesPath}/${prefix}`;
 
     createIfDoesntExist(domainFolder);
 
     let allFiles = filesByPrefix.get(prefix);
+
+    logInfo.count = allFiles.length;
+    logInfo.testCount = allFiles.filter((file) => file.isTest).length;
+
+    console.log(logInfo);
 
     for (const fileDetails of allFiles) {
       let newLocation = '';
@@ -101,10 +110,6 @@ export function reoderFiles(classesPath = 'force-app/main/default/classes') {
       } else {
         createIfDoesntExist(sourceFolder);
         newLocation = `${sourceFolder}/${fileDetails.fileName}`;
-      }
-
-      if (process.env.DX_FOLDERS_SHOW_OUTPUT) {
-        // logger.info(newLocation);
       }
 
       fs.renameSync(fileDetails.originalLocation, newLocation);
@@ -137,7 +142,7 @@ function parse(file) {
     let lastPart = parts[parts.length - 1];
 
     //i.e Test_ContactController
-    if (prefix.toLowerCase().includes('test')) {
+    if (prefix.toLowerCase() == 'test') {
       fileDetails.ignorePrefix = true;
     } else {
       //i.e. ContactController_Test[s]
