@@ -73,9 +73,8 @@ export function reoderFiles(classesPath = 'force-app/main/default/classes') {
   let keys = Array.from(filesByPrefix.keys());
 
   for (const prefix of keys) {
-    const logInfo = {
-      domain: prefix,
-    };
+    const logInfo = new LoggingInfo();
+    logInfo.domain = prefix;
 
     const domainFolder = `${classesPath}/${prefix}`;
 
@@ -83,10 +82,10 @@ export function reoderFiles(classesPath = 'force-app/main/default/classes') {
 
     let allFiles = filesByPrefix.get(prefix);
 
-    logInfo.count = allFiles.length;
-    logInfo.testCount = allFiles.filter((file) => file.isTest).length;
+    logInfo.setCount(allFiles.length);
+    logInfo.setTestCount(allFiles.filter((file) => file.isTest).length);
 
-    console.log(logInfo);
+    logInfo.printInfo();
 
     for (const fileDetails of allFiles) {
       let newLocation = '';
@@ -242,5 +241,9 @@ class LoggingInfo {
 
   private getCorrectCount(count: number) {
     return count > 0 ? count / 2 : count;
+  }
+
+  public printInfo() {
+    console.log(`Creating "${this.domain}" folder with ${this.count} files and ${this.testCount} tests`);
   }
 }
