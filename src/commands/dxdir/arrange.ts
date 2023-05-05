@@ -226,3 +226,21 @@ function createIfDoesntExist(path) {
     fs.mkdirSync(path);
   }
 }
+
+class LoggingInfo {
+  public domain: string;
+  private count: number;
+  private testCount: number;
+
+  public setCount(count: number) {
+    this.count = this.getCorrectCount(count);
+  }
+
+  public setTestCount(count: number) {
+    this.testCount = this.getCorrectCount(count);
+  }
+
+  private getCorrectCount(count: number) {
+    return count > 0 ? count / 2 : count;
+  }
+}
