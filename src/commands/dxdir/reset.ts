@@ -24,30 +24,29 @@ export default class DxdirReset extends SfCommand<DxdirResetResult> {
   public static readonly examples = messages.getMessages('examples');
 
   public static readonly flags = {
-    name: Flags.string({
-      summary: messages.getMessage('flags.name.summary'),
-      char: 'n',
-      required: false,
-    }),
     'output-dir': Flags.directory({
       summary: messages.getMessage('flags.output-dir.summary'),
       char: 'o',
       required: true,
       exists: true,
+      default: 'force-app/main/default/classes',
     }),
     'apex-dir': Flags.directory({
       summary: messages.getMessage('flags.apex-dir.summary'),
       char: 'd',
       required: true,
       exists: true,
+      default: 'force-app/main/default/classes',
     }),
   };
 
   public async run(): Promise<DxdirResetResult> {
     const { flags } = await this.parse(DxdirReset);
 
-    const name = flags.name ?? 'world';
-    this.log(`hello ${name} from /Users/pgonzalez/Documents/apps/sfplugin/dxfolders/src/commands/dxdir/reset.ts`);
+    const apexDir = flags['apex-dir'];
+    const outputDir = flags['output-dir'];
+    reset(apexDir, outputDir);
+
     return {
       path: '/Users/pgonzalez/Documents/apps/sfplugin/dxfolders/src/commands/dxdir/reset.ts',
     };
@@ -55,8 +54,6 @@ export default class DxdirReset extends SfCommand<DxdirResetResult> {
 }
 
 export function reset(apexDir, outputDir) {
-  console.log('did I get here? ' + apexDir + ' ' + outputDir);
-
   const files = fs.readdirSync(apexDir);
 
   // Loop through the files

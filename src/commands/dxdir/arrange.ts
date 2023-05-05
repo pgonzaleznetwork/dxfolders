@@ -244,6 +244,6 @@ class LoggingInfo {
   }
 
   public printInfo() {
-    console.log(`Creating "${this.domain}" folder with ${this.count} files and ${this.testCount} tests`);
+    //console.log(`Creating "${this.domain}" folder with ${this.count} files and ${this.testCount} tests`);
   }
 }

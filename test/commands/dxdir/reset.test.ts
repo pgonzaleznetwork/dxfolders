@@ -7,7 +7,7 @@ const reset = require('../../../src/commands/dxdir/reset').reset;
 describe('All reset tests', () => {
   const DEFAULT_PATH = 'force-app/main/default/classes/';
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     mock(project);
     reset(DEFAULT_PATH, DEFAULT_PATH);
   });
@@ -29,7 +29,7 @@ describe('All reset tests', () => {
     });
   });
 
-  afterAll(() => {
+  afterEach(() => {
     mock.restore();
   });
 });
