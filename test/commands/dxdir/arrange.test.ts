@@ -6,7 +6,8 @@ import { test as oTest } from '@oclif/test';
 const mock = require('mock-fs');
 const fs = require('fs');
 const reoderFiles = require('../../../src/commands/dxdir/arrange').reoderFiles;
-const DxdirArrange = require('../../../src/commands/dxdir/arrange');
+// const DxdirArrange = require('../../../src/commands/dxdir/arrange');
+import DxdirArrange from '../../../src/commands/dxdir/arrange';
 console.log(DxdirArrange);
 
 //todo modify later once command strucutre is finalized
@@ -31,8 +32,8 @@ describe('All tests', () => {
 
   beforeAll(async () => {
     mock(project);
-    await reoderFiles();
-    // await DxdirArrange.run([]);
+    // await reoderFiles();
+    await DxdirArrange.run([]);
   });
 
   test('Top-level folders are created from prefixes', async () => {
