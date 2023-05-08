@@ -40,7 +40,7 @@ export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
     const { flags } = await this.parse(DxdirArrange);
 
     const apexDir = flags['apex-dir'];
-    this.log(`apexDir: ${apexDir}`);
+    this.log(`Reading apex classes from ${apexDir}`);
 
     reoderFiles(apexDir);
 
@@ -51,6 +51,10 @@ export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
 }
 
 export function reoderFiles(classesPath = 'force-app/main/default/classes') {
+  if (!fs.existsSync(classesPath)) {
+    throw new Error(`Path ${classesPath} does not exist`);
+  }
+
   const files = fs.readdirSync(classesPath).map((file) => `${classesPath}/${file}`);
 
   let filesByPrefix = new Map();
@@ -69,11 +73,19 @@ export function reoderFiles(classesPath = 'force-app/main/default/classes') {
   let keys = Array.from(filesByPrefix.keys());
 
   for (const prefix of keys) {
+    const logInfo = new LoggingInfo();
+    logInfo.domain = prefix;
+
     const domainFolder = `${classesPath}/${prefix}`;
 
     createIfDoesntExist(domainFolder);
 
     let allFiles = filesByPrefix.get(prefix);
+
+    logInfo.setCount(allFiles.length);
+    logInfo.setTestCount(allFiles.filter((file) => file.isTest).length);
+
+    logInfo.printInfo();
 
     for (const fileDetails of allFiles) {
       let newLocation = '';
@@ -97,10 +109,6 @@ export function reoderFiles(classesPath = 'force-app/main/default/classes') {
       } else {
         createIfDoesntExist(sourceFolder);
         newLocation = `${sourceFolder}/${fileDetails.fileName}`;
-      }
-
-      if (process.env.DX_FOLDERS_SHOW_OUTPUT) {
-        // logger.info(newLocation);
       }
 
       fs.renameSync(fileDetails.originalLocation, newLocation);
@@ -133,7 +141,7 @@ function parse(file) {
     let lastPart = parts[parts.length - 1];
 
     //i.e Test_ContactController
-    if (prefix.toLowerCase().includes('test')) {
+    if (prefix.toLowerCase() == 'test') {
       fileDetails.ignorePrefix = true;
     } else {
       //i.e. ContactController_Test[s]
@@ -215,5 +223,27 @@ function showPreview(path) {
 function createIfDoesntExist(path) {
   if (!fs.existsSync(path)) {
     fs.mkdirSync(path);
+  }
+}
+
+class LoggingInfo {
+  public domain: string;
+  private count: number;
+  private testCount: number;
+
+  public setCount(count: number) {
+    this.count = this.getCorrectCount(count);
+  }
+
+  public setTestCount(count: number) {
+    this.testCount = this.getCorrectCount(count);
+  }
+
+  private getCorrectCount(count: number) {
+    return count > 0 ? count / 2 : count;
+  }
+
+  public printInfo() {
+    console.log(`Creating "${this.domain}" folder with ${this.count} files and ${this.testCount} tests`);
   }
 }

@@ -3,10 +3,10 @@
   "description": "todo",
   "version": "0.0.1",
   "dependencies": {
-    "@oclif/core": "^2.0.7",
+    "@oclif/core": "^2.8.5",
     "@salesforce/core": "^3.33.1",
     "@salesforce/kit": "^1.8.4",
-    "@salesforce/sf-plugins-core": "^2.0.1",
+    "@salesforce/sf-plugins-core": "^2.4.2",
     "got": "11.8.5",
     "jest": "^27.5.1",
     "jest-expect-message": "1.1.3",

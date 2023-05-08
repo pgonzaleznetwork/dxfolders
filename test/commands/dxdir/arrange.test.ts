@@ -6,9 +6,12 @@ import { test as oTest } from '@oclif/test';
 const mock = require('mock-fs');
 const fs = require('fs');
 const reoderFiles = require('../../../src/commands/dxdir/arrange').reoderFiles;
+// const DxdirArrange = require('../../../src/commands/dxdir/arrange');
+import DxdirArrange from '../../../src/commands/dxdir/arrange';
+console.log(DxdirArrange);
 
 //todo modify later once command strucutre is finalized
-describe('dxdir showme', () => {
+/*describe('dxdir showme', () => {
   oTest
     .stdout()
     .command(['dxdir showme'])
@@ -22,14 +25,15 @@ describe('dxdir showme', () => {
     .it('runs hello --name Astro', (ctx) => {
       oExpect(ctx.stdout).to.contain('hello Astro');
     });
-});
+});*/
 
 describe('All tests', () => {
   const DEFAULT_PATH = 'force-app/main/default/classes/';
 
   beforeAll(async () => {
     mock(project);
-    await reoderFiles();
+    // await reoderFiles();
+    await DxdirArrange.run([]);
   });
 
   test('Top-level folders are created from prefixes', async () => {
@@ -64,6 +68,17 @@ describe('All tests', () => {
       `${DEFAULT_PATH}SRM/src/SRM_deployer.cls-meta.xml`,
       `${DEFAULT_PATH}SRM/src/SRM_retrieve.cls`,
       `${DEFAULT_PATH}SRM/src/SRM_retrieve.cls-meta.xml`,
+    ];
+
+    files.forEach((file) => {
+      expect(fs.existsSync(file), `${file} does not exist`).toEqual(true);
+    });
+  });
+
+  test(`Classes that have a prefix that contains the word "test" should not be ignored, i.e Testim_AccountSync should create Testim as a domain folder`, async () => {
+    let files = [
+      `${DEFAULT_PATH}Testim/src/Testim_AccountSync.cls`,
+      `${DEFAULT_PATH}Testim/src/Testim_AccountSync.cls-meta.xml`,
     ];
 
     files.forEach((file) => {
