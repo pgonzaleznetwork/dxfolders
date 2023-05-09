@@ -27,6 +27,13 @@ describe('All reset tests', () => {
     files.forEach((file) => {
       expect(fs.existsSync(file), `${file} does not exist at specified location`).toEqual(true);
     });
+
+    ['SRM', 'Domain'].forEach((dir) => {
+      expect(
+        fs.existsSync(`${DEFAULT_PATH}${dir}`),
+        `The ${dir} directory should have been deleted by the reset command`
+      ).toEqual(false);
+    });
   });
 
   afterEach(() => {
