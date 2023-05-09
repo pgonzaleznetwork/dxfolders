@@ -3,6 +3,8 @@ import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 const path = require('path');
 const fs = require('fs');
+const fsExtra = require('fs-extra');
+const foldersToDelete = [];
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.load('dxfolders', 'dxdir.reset', [
@@ -54,14 +56,24 @@ export default class DxdirReset extends SfCommand<DxdirResetResult> {
 }
 
 export function reset(apexDir, outputDir) {
+  deleteFiles(apexDir, outputDir);
+
+  if (foldersToDelete.length > 0) {
+    foldersToDelete.forEach((folder) => {
+      fsExtra.removeSync(folder);
+    });
+  }
+}
+
+function deleteFiles(apexDir, outputDir) {
   const files = fs.readdirSync(apexDir);
 
-  // Loop through the files
   for (let file of files) {
     const filePath = path.join(apexDir, file);
 
     if (fs.statSync(filePath).isDirectory()) {
-      reset(filePath, outputDir);
+      foldersToDelete.push(filePath);
+      deleteFiles(filePath, outputDir);
     } else {
       const newFilePath = path.join(outputDir, file);
       fs.renameSync(filePath, newFilePath);

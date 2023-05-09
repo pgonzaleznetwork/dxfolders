@@ -12,7 +12,7 @@ describe('All reset tests', () => {
     reset(DEFAULT_PATH, DEFAULT_PATH);
   });
 
-  test('All files are added to the same target dir', async () => {
+  test('All files are added to the same target dir and domain folders are deleted', async () => {
     let files = [
       `${DEFAULT_PATH}SRM_deployer.cls`,
       `${DEFAULT_PATH}SRM_deployer.cls-meta.xml`,
@@ -28,7 +28,7 @@ describe('All reset tests', () => {
       expect(fs.existsSync(file), `${file} does not exist at specified location`).toEqual(true);
     });
 
-    ['SRM', 'Domain'].forEach((dir) => {
+    ['SRM', 'SRM/src', 'SRM/__tests__', 'Domain', 'Domain/src', 'Domain/__tests__'].forEach((dir) => {
       expect(
         fs.existsSync(`${DEFAULT_PATH}${dir}`),
         `The ${dir} directory should have been deleted by the reset command`

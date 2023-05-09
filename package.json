@@ -7,6 +7,7 @@
     "@salesforce/core": "^3.33.1",
     "@salesforce/kit": "^1.8.4",
     "@salesforce/sf-plugins-core": "^2.0.1",
+    "fs-extra": "^11.1.1",
     "got": "11.8.5",
     "jest": "^27.5.1",
     "jest-expect-message": "1.1.3",
