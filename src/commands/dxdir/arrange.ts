@@ -228,8 +228,8 @@ function createIfDoesntExist(path) {
 
 class LoggingInfo {
   public domain: string;
-  private count: number;
-  private testCount: number;
+  count: number;
+  testCount: number;
 
   public setCount(count: number) {
     this.count = this.getCorrectCount(count);
