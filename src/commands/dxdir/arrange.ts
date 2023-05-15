@@ -60,7 +60,8 @@ export function reoderFiles(classesPath = 'force-app/main/default/classes') {
   let filesByPrefix = new Map();
   filesByPrefix.set(OTHER_FILES, []);
 
-  let allFileDetails = files.map((file) => parse(file));
+  //don't parse existing folders, just files
+  let allFileDetails = files.filter((file) => fs.statSync(file).isFile()).map((file) => parse(file));
 
   for (const fileDetails of allFileDetails) {
     if (filesByPrefix.has(fileDetails.prefix)) {
@@ -125,6 +126,8 @@ function parse(file) {
 
   const fileName = parsedFile.base;
   let pureName = removeExtension(fileName);
+
+  process.stdout.write(`Processing ${fileName}...`);
 
   let fileDetails = {
     ignorePrefix: false,

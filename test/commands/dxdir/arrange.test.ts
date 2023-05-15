@@ -257,6 +257,11 @@ const project = {
 
           'Testim_AccountSync.cls': '',
           'Testim_AccountSync.cls-meta.xml': '',
+
+          ExistingFolder: {
+            'ExistingClass.cls': '',
+            'ExistingClass.cls-meta.xml': '',
+          },
         },
       },
     },
