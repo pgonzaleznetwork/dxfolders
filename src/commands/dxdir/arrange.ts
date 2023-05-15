@@ -127,8 +127,6 @@ function parse(file) {
   const fileName = parsedFile.base;
   let pureName = removeExtension(fileName);
 
-  process.stdout.write(`Processing ${fileName}...`);
-
   let fileDetails = {
     ignorePrefix: false,
     prefix: '',
