@@ -7,6 +7,23 @@ const mock = require('mock-fs');
 const fs = require('fs');
 const reoderFiles = require('../../../src/commands/dxdir/arrange').reoderFiles;
 
+//todo modify later once command strucutre is finalized
+describe('dxdir showme', () => {
+  oTest
+    .stdout()
+    .command(['dxdir showme'])
+    .it('runs hello', (ctx) => {
+      oExpect(ctx.stdout).to.contain('hello world');
+    });
+
+  oTest
+    .stdout()
+    .command(['dxdir showme', '--name', 'Astro'])
+    .it('runs hello --name Astro', (ctx) => {
+      oExpect(ctx.stdout).to.contain('hello Astro');
+    });
+});
+
 describe('All tests', () => {
   const DEFAULT_PATH = 'force-app/main/default/classes/';
 
