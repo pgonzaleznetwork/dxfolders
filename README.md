@@ -6,59 +6,12 @@
 
 <!-- commands -->
 
-- [`sf call external service`](#sf-call-external-service)
-- [`sf connect org`](#sf-connect-org)
 - [`sf dxdir arrange`](#sf-dxdir-arrange)
 - [`sf dxdir reset`](#sf-dxdir-reset)
-- [`sf dxdir showme`](#sf-dxdir-showme)
-- [`sf hello world`](#sf-hello-world)
-
-## `sf call external service`
-
-Summary of a command.
-
-```
-USAGE
-  $ sf call external service [--json]
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Summary of a command.
-
-  Description of a command.
-
-EXAMPLES
-  $ sf call external service
-```
-
-## `sf connect org`
-
-Summary of a command.
-
-```
-USAGE
-  $ sf connect org -u <value> [--json]
-
-FLAGS
-  -u, --username=<value>  (required) Salesforce org username.
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Summary of a command.
-
-  Description of a command.
-
-EXAMPLES
-  $ sf connect org
-```
 
 ## `sf dxdir arrange`
 
-Summary of a command.
+Arranges your apex classes based on their prefix
 
 ```
 USAGE
@@ -72,9 +25,28 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  Summary of a command.
+  Arranges your apex classes based on their prefix
 
-  Description of a command.
+  This command goes through all apex class files on a given location and reorganises them based on their prefix (if
+  any).
+
+  For example, if you have the following classes:
+
+  - `SRM_Deployer.cls`
+  - `SRM_DeployerTests.cls`
+  - `Account_Service.cls`
+  - `Account_ServiceTests.cls`
+
+  You will end up with the following folders
+
+  - SRM
+  - src
+  - tests
+  - Account
+  - src
+  - tests
+
+  And the classes will be moved to those folders, taking into account whether they are tests classes.
 
 EXAMPLES
   $ sf dxdir arrange
@@ -104,58 +76,6 @@ DESCRIPTION
 
 EXAMPLES
   $ sf dxdir reset
-```
-
-## `sf dxdir showme`
-
-Summary of a command.
-
-```
-USAGE
-  $ sf dxdir showme [--json] [-n <value>]
-
-FLAGS
-  -n, --name=<value>  Description of a flag.
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Summary of a command.
-
-  Description of a command.
-
-EXAMPLES
-  $ sf dxdir showme
-```
-
-## `sf hello world`
-
-Say hello.
-
-```
-USAGE
-  $ sf hello world [--json] [-n <value>]
-
-FLAGS
-  -n, --name=<value>  [default: World] The name of the person you'd like to say hello to.
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Say hello.
-
-  Say hello either to the world or someone you know.
-
-EXAMPLES
-  Say hello to the world:
-
-    $ sf hello world
-
-  Say hello to someone you know:
-
-    $ sf hello world --name Astro
 ```
 
 <!-- commandsstop -->

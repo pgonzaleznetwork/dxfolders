@@ -217,7 +217,7 @@ function removeExtension(fileName) {
 
 function showPreview(path) {
   glob(path + '/**/*', function (er, files) {
-    console.log(files);
+    //console.log(files);
   });
 }
 
