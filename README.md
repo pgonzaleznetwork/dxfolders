@@ -20,6 +20,9 @@ or
 
 `sfdx plugins:install dxfolders`
 
+If you install the plugin with `sfdx` you must execute with `sfdx`.
+Likewise, if you install it with `sf` you must run it with `sf`
+
 ## Commands
 
 `dxfolders` comes with 2 simple commands:
