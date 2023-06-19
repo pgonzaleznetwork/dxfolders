@@ -45,14 +45,12 @@ export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
 
     this.log(`Successfully created the following folders: \n`);
 
-    let jsonOutput = {
-      folders: [],
-    };
+    let folders = [];
 
     logs.forEach((log) => {
       this.log(`${log.domain} with ${log.getCount()} apex classes and ${log.getTestCount()} test classes\n`);
 
-      jsonOutput.folders.push({
+      folders.push({
         name: log.domain,
         apexClasses: log.getCount(),
         testClasses: log.getTestCount(),
@@ -60,7 +58,7 @@ export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
     });
 
     return {
-      folders: jsonOutput,
+      folders: folders,
     };
   }
 }
