@@ -21,7 +21,7 @@ It is **highly** recommended that you test this plugin in a throwaway sfdx proje
 
 Run the following command to install the plugin
 
-`sf plugins install dxfir`
+`sf plugins install dxdir`
 
 ## `sf dxdir arrange`
 
