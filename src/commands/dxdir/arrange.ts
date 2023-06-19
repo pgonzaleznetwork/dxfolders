@@ -19,7 +19,7 @@ const messages = Messages.load('dxfolders', 'dxdir.arrange', [
 ]);
 
 export type DxdirArrangeResult = {
-  path: string;
+  folders: any;
 };
 
 export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
@@ -40,17 +40,34 @@ export default class DxdirArrange extends SfCommand<DxdirArrangeResult> {
     const { flags } = await this.parse(DxdirArrange);
 
     const apexDir = flags['apex-dir'];
-    this.log(`Reading apex classes from ${apexDir}`);
 
-    reoderFiles(apexDir);
+    const logs = reoderFiles(apexDir);
+
+    this.log(`Successfully created the following folders: \n`);
+
+    let jsonOutput = {
+      folders: [],
+    };
+
+    logs.forEach((log) => {
+      this.log(`${log.domain} with ${log.getCount()} apex classes and ${log.getTestCount()} test classes\n`);
+
+      jsonOutput.folders.push({
+        name: log.domain,
+        apexClasses: log.getCount(),
+        testClasses: log.getTestCount(),
+      });
+    });
 
     return {
-      path: '/Users/pgonzalez/Documents/apps/sfplugin/dxfolders/src/commands/dxdir/arrange.ts',
+      folders: jsonOutput,
     };
   }
 }
 
 export function reoderFiles(classesPath = 'force-app/main/default/classes') {
+  const logs = [];
+
   if (!fs.existsSync(classesPath)) {
     throw new Error(`Path ${classesPath} does not exist`);
   }
@@ -86,7 +103,7 @@ export function reoderFiles(classesPath = 'force-app/main/default/classes') {
     logInfo.setCount(allFiles.length);
     logInfo.setTestCount(allFiles.filter((file) => file.isTest).length);
 
-    logInfo.printInfo();
+    logs.push(logInfo);
 
     for (const fileDetails of allFiles) {
       let newLocation = '';
@@ -119,6 +136,8 @@ export function reoderFiles(classesPath = 'force-app/main/default/classes') {
   if (process.env.DX_FOLDERS_SHOW_OUTPUT) {
     showPreview(classesPath);
   }
+
+  return logs;
 }
 
 function parse(file) {
@@ -236,8 +255,16 @@ class LoggingInfo {
     this.count = this.getCorrectCount(count);
   }
 
+  public getCount() {
+    return this.count;
+  }
+
   public setTestCount(count: number) {
     this.testCount = this.getCorrectCount(count);
+  }
+
+  public getTestCount() {
+    return this.testCount;
   }
 
   private getCorrectCount(count: number) {
