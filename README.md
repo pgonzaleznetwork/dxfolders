@@ -1,4 +1,4 @@
-# dxdir—Arrange your apex classes based on their prefix
+# dxfolders—Arrange your apex classes based on their prefix
 
 [![NPM](https://img.shields.io/npm/v/dxfolders.svg?label=dxfolders)](https://www.npmjs.com/package/dxfolders) [![Downloads/week](https://img.shields.io/npm/dw/dxfolders.svg)](https://npmjs.org/package/dxfolders) [![License](https://img.shields.io/badge/License-BSD%203--Clause-brightgreen.svg)](https://raw.githubusercontent.com/salesforcecli/dxfolders/main/LICENSE.txt)
 
