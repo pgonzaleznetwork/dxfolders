@@ -17,7 +17,7 @@ const messages = Messages.load('dxfolders', 'dxdir.reset', [
 ]);
 
 export type DxdirResetResult = {
-  path: string;
+  deletedFolders: string[];
 };
 
 export default class DxdirReset extends SfCommand<DxdirResetResult> {
@@ -47,10 +47,21 @@ export default class DxdirReset extends SfCommand<DxdirResetResult> {
 
     const apexDir = flags['apex-dir'];
     const outputDir = flags['output-dir'];
+
     reset(apexDir, outputDir);
 
+    if (foldersToDelete.length) {
+      this.log(`Successfully deleted the following folders AND moved the files back to ${outputDir}: \n`);
+
+      foldersToDelete.forEach((folder) => {
+        this.log(`${folder}\n`);
+      });
+    } else {
+      this.log(`No sub-folders found. All files remain in ${apexDir}`);
+    }
+
     return {
-      path: '/Users/pgonzalez/Documents/apps/sfplugin/dxfolders/src/commands/dxdir/reset.ts',
+      deletedFolders: foldersToDelete,
     };
   }
 }
