@@ -17,6 +17,12 @@ It is **highly** recommended that you test this plugin in a throwaway sfdx proje
 - [`sf dxdir arrange`](#sf-dxdir-arrange)
 - [`sf dxdir reset`](#sf-dxdir-reset)
 
+## Installation
+
+Run the following command to install the plugin
+
+`sf plugins install dxfir`
+
 ## `sf dxdir arrange`
 
 Arranges your apex classes based on their prefix

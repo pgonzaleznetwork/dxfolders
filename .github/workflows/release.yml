@@ -3,7 +3,9 @@ name: Node.js Package
 on:
   push:
     branches: [main]
-
+    paths-ignore:
+      - 'messages/'
+      - 'README.md'
 jobs:
   build:
     runs-on: ubuntu-latest
