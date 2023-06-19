@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/dxfolders.svg?label=dxfolders)](https://www.npmjs.com/package/dxfolders) [![Downloads/week](https://img.shields.io/npm/dw/dxfolders.svg)](https://npmjs.org/package/dxfolders) [![License](https://img.shields.io/badge/License-BSD%203--Clause-brightgreen.svg)](https://raw.githubusercontent.com/salesforcecli/dxfolders/main/LICENSE.txt)
 
-`dxdir` is a simple `sf` plugin that automatically organises your apex classes in an sfdx folder based on their prefix and/or whether they are test classes.
+`dxfolders` is a simple `sf` plugin that automatically organises your apex classes in an sfdx folder based on their prefix and/or whether they are test classes.
 
 <img src="./.github/images/dxdir.png">
 
@@ -10,18 +10,24 @@
 
 It is **highly** recommended that you test this plugin in a throwaway sfdx project. Do **NOT** use it on a git-tracked project unless you've tested it somewhere else and are happy with the results.
 
+## Installation
+
+Run the following command to install the plugin
+
+`sf plugins install dxfolders`
+
+or
+
+`sfdx plugins:install dxfolders`
+
 ## Commands
+
+`dxfolders` comes with 2 simple commands:
 
 <!-- commands -->
 
 - [`sf dxdir arrange`](#sf-dxdir-arrange)
 - [`sf dxdir reset`](#sf-dxdir-reset)
-
-## Installation
-
-Run the following command to install the plugin
-
-`sf plugins install dxdir`
 
 ## `sf dxdir arrange`
 
